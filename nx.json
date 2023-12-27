@@ -12,5 +12,12 @@
       "cache": true
     }
   },
-  "nxCloudAccessToken": "NDQwNDdkZTktOTRmYS00NGYyLTkzNjYtNWM0ZTBmNDc1MTIxfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NGM0YWU1YWMtNTdmMy00YjRhLTg1ZDgtMzE0MzUwZTNjYWRmfHJlYWQtd3JpdGU=",
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libsDir"
+  },
+  "affected": {
+    "defaultBase": "main"
+  }
 }
