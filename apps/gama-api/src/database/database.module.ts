@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/users/entity/user.entity';
+import {ProfilFinancierTypes} from "../profil-financier/entity/profil-financier-types.entity";
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { User } from 'src/users/entity/user.entity';
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        entites: [User],
+        entities: [User, ProfilFinancierTypes],
         synchronize: true,
         autoLoadEntities: true,
       }),
