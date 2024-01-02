@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/users/entity/user.entity';
-import {ProfilFinancierTypes} from "../profil-financier/entity/profil-financier-types.entity";
+import { ActivityProfils } from '../profil-financier/entity/profil-financier-types.entity';
+import { UserActivityProfil } from '../profil-financier/activity/entity/user-activity-profil.entity';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import {ProfilFinancierTypes} from "../profil-financier/entity/profil-financier-
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        entities: [User, ProfilFinancierTypes],
+        entities: [User, UserActivityProfil, ActivityProfils],
         synchronize: true,
         autoLoadEntities: true,
       }),

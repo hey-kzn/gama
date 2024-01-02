@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'profils_financier_types' })
-export class ProfilFinancierTypes {
+@Entity({ name: 'activity_profils' })
+export class ActivityProfils {
   @PrimaryGeneratedColumn('uuid', {
-    primaryKeyConstraintName: 'PK_PROFILS_FINANCIER_TYPES',
+    primaryKeyConstraintName: 'PK_ACTIVITY_PROFILS',
   })
   id: string;
   @Column({ type: 'varchar' })
