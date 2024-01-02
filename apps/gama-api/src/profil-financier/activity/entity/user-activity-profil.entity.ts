@@ -42,9 +42,4 @@ export class UserActivityProfil {
   @ManyToOne(() => ActivityProfils)
   @JoinColumn({ name: 'type' })
   activityProfilsEntity: ActivityProfils;
-
-  // Propriété pour récupérer le nom du type d'activité
-  get typeName(): string {
-    return this.activityProfilsEntity?.name || this.typeName;
-  }
 }
