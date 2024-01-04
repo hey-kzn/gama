@@ -4,11 +4,17 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { ErrorPage } from './pages/ErrorPage';
+import { LoginPage } from './pages/LoginPage.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
     errorElement: <ErrorPage />
   }
 ]);
