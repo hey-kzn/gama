@@ -15,7 +15,7 @@
   "nxCloudAccessToken": "NGM0YWU1YWMtNTdmMy00YjRhLTg1ZDgtMzE0MzUwZTNjYWRmfHJlYWQtd3JpdGU=",
   "workspaceLayout": {
     "appsDir": "apps",
-    "libsDir": "libsDir"
+    "libsDir": "libs"
   },
   "affected": {
     "defaultBase": "main"

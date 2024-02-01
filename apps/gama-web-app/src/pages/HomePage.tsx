@@ -5,8 +5,8 @@ export const HomePage = () => {
         <h1 className='w-full text-3xl font-bold'>GAMA</h1>
         <div className='flex space-x-4'>
           {/* use-navigate pour aller sur LoginPage*/}
-          <div className='p-4 bg-purple-600 rounded-lg font-bold'>Login</div>
-          <button className='p-4 bg-purple-600 rounded-lg font-bold'>Register</button>
+          <button className='btn'>Login</button>
+          <button className='btn'>Register</button>
         </div>
       </header>
       <div>

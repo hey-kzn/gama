@@ -1,0 +1,54 @@
+import { useState } from 'react';
+
+export function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const isLoading = false;
+
+  const handleChangeUsername = (e) => {
+    e.preventDefault();
+    setUsername(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    e.preventDefault();
+    setPassword(e.target.value);
+  };
+
+  return (
+    <form className='bg-[#131313] shadow-md rounded-lg p-6'>
+      <div>
+        <h1 className='mb-4 text-2xl font-bold'>Login</h1>
+      </div>
+      <div className='mb-4'>
+        <div className='label'>
+          <span className='label-text'>Username</span>
+        </div>
+        <input
+          type='text'
+          placeholder='Insérez votre username'
+          className='input input-bordered w-full input-md'
+          value={username}
+          onChange={handleChangeUsername}
+        />
+      </div>
+      <div className='mb-6'>
+        <div className='label'>
+          <span className='label-text'>Mot de passe</span>
+        </div>
+        <input
+          type='text'
+          placeholder='Insérez votre mot de passe'
+          className='input input-bordered w-full input-md'
+          value={password}
+          onChange={handleChangePassword}
+        />
+      </div>
+      <div className='flex items-center'>
+        <button className='btn' type='submit'>
+          Se connecter
+        </button>
+      </div>
+    </form>
+  );
+}
