@@ -1,0 +1,1 @@
+- [ ] Changer de router react, migrer vers [TanStack Router](https://tanstack.com/router/latest)

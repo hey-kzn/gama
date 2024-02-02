@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export function LoginForm() {
   const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ export function LoginForm() {
           <span className='label-text'>Mot de passe</span>
         </div>
         <input
-          type='text'
+          type='password'
           placeholder='Insérez votre mot de passe'
           className='input input-bordered w-full input-md'
           value={password}
@@ -48,6 +49,12 @@ export function LoginForm() {
         <button className='btn' type='submit'>
           Se connecter
         </button>
+        <div>
+          <span>Pas encore de compte ?</span>
+          <Link to='/register' className='font-bold text-purple-600'>
+            Cliquez-ici
+          </Link>
+        </div>
       </div>
     </form>
   );
