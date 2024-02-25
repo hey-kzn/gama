@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Simulate } from 'react-dom/test-utils';
+import submit = Simulate.submit;
 
 export function LoginForm() {
   const [username, setUsername] = useState('');
@@ -16,8 +18,10 @@ export function LoginForm() {
     setPassword(e.target.value);
   };
 
+  const onSubmit = (e) => {};
+
   return (
-    <form className='bg-[#131313] shadow-md rounded-lg p-6'>
+    <form className='bg-[#131313] shadow-md rounded-lg p-6' onSubmit={onSubmit}>
       <div>
         <h1 className='mb-4 text-2xl font-bold'>Login</h1>
       </div>
