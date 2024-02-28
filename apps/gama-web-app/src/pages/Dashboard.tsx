@@ -1,7 +1,7 @@
 export const Dashboard = () => {
   return (
     <>
-      <div>Dashboard (Protected)</div>
+      <div>Dashboard (GG t'es co)</div>
     </>
   );
 };

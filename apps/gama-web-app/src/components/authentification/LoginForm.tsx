@@ -18,7 +18,9 @@ export function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const onSubmit = (e) => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <form className='bg-[#131313] shadow-md rounded-lg p-6' onSubmit={onSubmit}>
