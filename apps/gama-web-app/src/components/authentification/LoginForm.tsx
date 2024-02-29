@@ -1,25 +1,24 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Simulate } from 'react-dom/test-utils';
-import submit = Simulate.submit;
 
 export function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const isLoading = false;
 
-  const handleChangeUsername = (e) => {
-    e.preventDefault();
-    setUsername(e.target.value);
+  const handleChangeUsername = (event) => {
+    event.preventDefault();
+    setUsername(event.target.value);
   };
 
-  const handleChangePassword = (e) => {
-    e.preventDefault();
-    setPassword(e.target.value);
+  const handleChangePassword = (event) => {
+    event.preventDefault();
+    setPassword(event.target.value);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (event) => {
+    event.preventDefault();
   };
 
   return (
