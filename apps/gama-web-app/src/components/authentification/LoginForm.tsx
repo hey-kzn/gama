@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Simulate } from 'react-dom/test-utils';
 
 export function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isLoading = false;
 
   const handleChangeUsername = (event) => {
     event.preventDefault();
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handleChangePassword = (event) => {
@@ -19,6 +18,15 @@ export function LoginForm() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    fetch('http://localhost:3000/auth/local/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ email, password })
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -32,9 +40,9 @@ export function LoginForm() {
         </div>
         <input
           type='text'
-          placeholder='Insérez votre username'
+          placeholder='Insérez votre email'
           className='input input-bordered w-full input-md'
-          value={username}
+          value={email}
           onChange={handleChangeUsername}
         />
       </div>
