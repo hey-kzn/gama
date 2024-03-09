@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 export const HomePage = () => {
   return (
@@ -7,10 +8,10 @@ export const HomePage = () => {
         <h1 className='w-full text-3xl font-bold'>GAMA</h1>
         <div className='flex space-x-4'>
           <Link to='/login'>
-            <button className='btn'>Login</button>
+            <Button>Login</Button>
           </Link>
           <Link to='/register'>
-            <button className='btn'>Register</button>
+            <Button>Register</Button>
           </Link>
         </div>
       </header>

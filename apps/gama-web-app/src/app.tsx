@@ -1,10 +1,9 @@
 import { RouterProvider } from 'react-router-dom';
-import { publicRouter } from './router/publicRouter';
-import { useState } from 'react';
+import { publicRouter } from '@/components/router/publicRouter';
 
 export const App = () => {
-  const [theme, setTheme] = useState('dark');
+  //const [theme, setTheme] = useState('dark');
 
-  useEff;
+  useEffect(() => {});
   return <RouterProvider router={publicRouter}></RouterProvider>;
 };

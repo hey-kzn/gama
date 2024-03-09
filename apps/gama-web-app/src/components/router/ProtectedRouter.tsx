@@ -1,7 +1,5 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Dashboard } from '../pages/Dashboard';
 import { PropsWithChildren } from 'react';
-import { useAuth } from '../context/AuthContext.tsx';
+import { useAuth } from '@/hooks/context/AuthContext';
 
 type ProtectedRouteProps = PropsWithChildren;
 // TODO: check if the user is auth
