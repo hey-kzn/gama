@@ -1,9 +1,11 @@
 import { RouterProvider } from 'react-router-dom';
-import { publicRouter } from '@/components/router/publicRouter';
+import { router } from '@/components/router/router.tsx';
+import { AuthProdiver } from '@/hooks/context/AuthContext';
 
 export const App = () => {
-  //const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {});
-  return <RouterProvider router={publicRouter}></RouterProvider>;
+  return (
+    <AuthProdiver>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProdiver>
+  );
 };

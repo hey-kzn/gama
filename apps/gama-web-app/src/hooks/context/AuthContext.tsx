@@ -1,37 +1,34 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react';
-import { User } from '../../types/User';
+import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LoginDTO } from '@/services/auth.dto';
+import { loginService } from '@/services/auth.service';
 
-const AuthContext = createContext<User | null>(null);
+const AuthContext = createContext(false);
 
 /**
  *
  * @param children
- * @param isSignedIn
  * @constructor
+ * @description Permet de savoir si l'utilsateur est connecté ou non
  */
-export const AuthProdiver = ({ children, isSignedIn }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
+export const AuthProdiver = ({ children }: AuthProviderProps) => {
+  const [isAuth, setAuth] = useState(false);
+  const login = async (loginDto: LoginDTO) => {
+    const data = await loginService(loginDto);
 
-  const login = async (data) => {
-    setUser(data);
-    navigate('/dashboard');
+    if (!data) {
+      setAuth(true);
+    }
+    console.log(data);
   };
 
-  const logout = () => {
-    setUser(null);
-    navigate('/', { replace: true });
+  const logout = async () => {};
+
+  const valueContext = {
+    login
   };
-  const value = useMemo(
-    () => ({
-      user,
-      login,
-      logout
-    }),
-    [user]
-  );
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+
+  return <AuthContext.Provider value={valueContext}>{children}</AuthContext.Provider>;
 };
 
 // Custom hook for have access to the context

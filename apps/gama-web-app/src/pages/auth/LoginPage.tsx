@@ -12,6 +12,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
+import { useAuth } from '@/hooks/context/AuthContext.tsx';
 
 export const LoginPage = () => {
   // Component
@@ -27,14 +28,16 @@ export const LoginPage = () => {
         password: 'test1'
       }
     });
-    function handleSubmit(values: z.infer<typeof formSchema>) {
-      // TODO: fetch url
+    async function handleLogin(values: z.infer<typeof formSchema>) {
+      await login(values);
       console.log(values);
     }
 
+    const { login } = useAuth();
+
     return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className='w-full'>
+        <form onSubmit={form.handleSubmit(handleLogin)} className='w-full'>
           <div className='space-y-2.5'>
             <FormField
               control={form.control}

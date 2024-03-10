@@ -1,6 +1,6 @@
 import { LoginDTO, RegisterDTO } from '@/services/auth.dto';
 
-export async function login(loginDTO: LoginDTO) {
+export async function loginService(loginDTO: LoginDTO) {
   const opt = {
     method: 'POST',
     headers: {
@@ -11,10 +11,10 @@ export async function login(loginDTO: LoginDTO) {
   };
   return await fetch('http://localhost:3001/auth/local/login', opt)
     .then((response) => response.json())
-    .then((result) => result.data());
+    .then((result) => result.data);
 }
 
-export async function register(registerDTO: RegisterDTO) {
+export async function registerServivce(registerDTO: RegisterDTO) {
   const opt = {
     method: 'POST',
     headers: {
@@ -26,5 +26,5 @@ export async function register(registerDTO: RegisterDTO) {
 
   return await fetch('http://localhost:3001/auth/local/register', opt)
     .then((response) => response.json())
-    .then((result) => result.data());
+    .then((result) => result.data);
 }

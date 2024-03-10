@@ -28,7 +28,7 @@ describe('UsersController', () => {
     controller = module.get<UsersController>(UsersController);
   });
 
-  describe('User informations', () => {
+  describe('UserType informations', () => {
     it('Should return user information by id', () => {
       expect(controller.findOne('1')).toEqual({ id: '1' });
     });
