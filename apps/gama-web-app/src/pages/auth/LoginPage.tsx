@@ -12,7 +12,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '@/hooks/context/AuthContext.tsx';
+import { useAuth } from '@/context/AuthContext.tsx';
 
 export const LoginPage = () => {
   // Component
