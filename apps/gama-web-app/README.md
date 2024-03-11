@@ -5,14 +5,14 @@
 
 ### Folder Architecture:
 ```
-src
+src/
   assets/
-  components/
-  context/
+  components/           # Composants de l'application réutilisable
+  context/              # Store de l'application
   hooks/
   lib/
-  pages/
-  services/
+  pages/                # Interface utilisateur
+  services/             # Appel des données
   utils/
 ```
 
