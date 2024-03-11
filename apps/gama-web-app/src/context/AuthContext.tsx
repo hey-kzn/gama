@@ -1,9 +1,6 @@
-import { createContext, useContext, useState } from 'react';
-import { LoginDTO } from '@/services/auth.dto.ts';
-import { loginService } from '@/services/auth.service.ts';
-import { useLocalStorage } from '@/hooks/useLocalStorage.tsx';
+import { createContext, useState } from 'react';
 
-export const AuthContext = createContext(false);
+export const AuthContext = createContext({});
 
 /**
  *
@@ -13,20 +10,8 @@ export const AuthContext = createContext(false);
  */
 export const AuthProdiver = ({ children }: AuthProviderProps) => {
   const [isAuth, setAuth] = useState(false);
-  const [setValue] = useLocalStorage();
-  const login = async (loginDto: LoginDTO) => {
-    const data = await loginService(loginDto);
-
-    if (!data) {
-      setAuth(true);
-    }
-    console.log(data);
-  };
-
-  const logout = async () => {};
 
   const valueContext = {
-    login,
     isAuth
   };
 
