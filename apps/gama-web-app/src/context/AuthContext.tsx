@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { redirect } from 'react-router-dom';
+import * as DTO from '@/services/auth/auth.dto';
 
 export const AuthContext = createContext({});
 
@@ -10,7 +11,9 @@ export const AuthContext = createContext({});
  * @description Permet de savoir si l'utilsateur est connecté ou non
  */
 export const AuthProdiver = ({ children }: AuthProviderProps) => {
-  const login = async () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const login = async (dto: LoginDTO) => {
+    setIsLoading(true);
     console.log('test');
     // set un status de loading
     // appelService
@@ -21,7 +24,9 @@ export const AuthProdiver = ({ children }: AuthProviderProps) => {
   const logout = () => {};
   const refreshRT = () => {};
   return (
-    <AuthContext.Provider value={{ login, logout, refreshRT }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login, logout, isLoading, refreshRT }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

@@ -11,7 +11,8 @@ export async function loginUser(loginDTO: DTO.LoginDTO) {
   };
   return await fetch('http://localhost:3001/auth/local/login', opt)
     .then((response) => response.json())
-    .then((result) => result.data);
+    .then((result) => result.data)
+    .catch((err) => err.message);
 }
 
 export async function registerUser(registerDTO: DTO.RegisterDTO) {
