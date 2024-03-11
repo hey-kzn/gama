@@ -1,6 +1,6 @@
-import { LoginDTO, RegisterDTO } from '@/services/auth.dto';
+import * as DTO from '@/services/auth/auth.dto';
 
-export async function loginService(loginDTO: LoginDTO) {
+export async function loginUser(loginDTO: DTO.LoginDTO) {
   const opt = {
     method: 'POST',
     headers: {
@@ -14,7 +14,7 @@ export async function loginService(loginDTO: LoginDTO) {
     .then((result) => result.data);
 }
 
-export async function registerServivce(registerDTO: RegisterDTO) {
+export async function registerUser(registerDTO: DTO.RegisterDTO) {
   const opt = {
     method: 'POST',
     headers: {

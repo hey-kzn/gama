@@ -8,5 +8,7 @@ export const useUser = () => {
 
   if (context === undefined) throw new Error('useUser must be used within an AuthProvider');
 
+  const getUser = () => {};
+
   return context;
 };

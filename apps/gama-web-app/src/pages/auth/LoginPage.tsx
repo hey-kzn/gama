@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -12,9 +11,10 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '@/context/AuthContext.tsx';
+import { useAuth } from '@/hooks/useAuth.tsx';
 
 export const LoginPage = () => {
+  const { login } = useAuth();
   // Component
   function UserAuthForm() {
     const formSchema = z.object({
@@ -32,8 +32,6 @@ export const LoginPage = () => {
       await login(values);
       console.log(values);
     }
-
-    const { login } = useAuth();
 
     return (
       <Form {...form}>
