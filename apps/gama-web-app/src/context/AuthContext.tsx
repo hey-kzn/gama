@@ -13,6 +13,7 @@ export const AuthContext = createContext({});
  * @description Permet de savoir si l'utilsateur est connecté ou non
  */
 export const AuthProdiver = ({ children }: AuthProviderProps) => {
+  const [isAuth, setIsAuth] = useState(false);
   const { setItem } = useLocalStorage();
   const login = async (dto: LoginDTO) => {
     const data = await loginUser(dto);

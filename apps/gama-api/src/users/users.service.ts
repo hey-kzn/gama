@@ -18,11 +18,16 @@ export class UsersService {
     try {
       // Essaye d'abord de trouver par ID
       const userById = await this.usersRepository.findOne({
-        where: { id: data },
+        where: { id: data.id },
       });
 
       if (userById) {
-        return userById;
+        return {
+          created_at: userById.created_at,
+          id: userById.id,
+          email: userById.email,
+          username: userById.username,
+        };
       }
 
       // Essaye de trouver par l'email
