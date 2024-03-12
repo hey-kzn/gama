@@ -1,6 +1,8 @@
 import { createContext, useState } from 'react';
 import { redirect } from 'react-router-dom';
-import * as DTO from '@/services/auth/auth.dto';
+import * as DTO from '@/services/auth/auth';
+import { loginUser } from '@/services/auth/auth.service.ts';
+import { useLocalStorage } from '@/hooks/useLocalStorage.tsx';
 
 export const AuthContext = createContext({});
 
@@ -11,10 +13,13 @@ export const AuthContext = createContext({});
  * @description Permet de savoir si l'utilsateur est connecté ou non
  */
 export const AuthProdiver = ({ children }: AuthProviderProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { setItem } = useLocalStorage();
   const login = async (dto: LoginDTO) => {
-    setIsLoading(true);
-    console.log('test');
+    const data = await loginUser(dto);
+
+    console.log(data);
+    setItem('acess_token', data.access_token);
+    setItem('refresh_token', data.refresh_token);
     // set un status de loading
     // appelService
     //  -> set le AT & RT du userContext
@@ -24,9 +29,7 @@ export const AuthProdiver = ({ children }: AuthProviderProps) => {
   const logout = () => {};
   const refreshRT = () => {};
   return (
-    <AuthContext.Provider value={{ login, logout, isLoading, refreshRT }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ login, logout, refreshRT }}>{children}</AuthContext.Provider>
   );
 };
 

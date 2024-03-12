@@ -4,19 +4,14 @@ import { ErrorPage } from '../../pages/ErrorPage';
 import { LoginPage } from '../../pages/auth/LoginPage';
 import { RegisterPage } from '../../pages/auth/RegisterPage';
 import { DashboardPage } from '@/pages/DashboardPage';
+import { ProtectedRoutes } from '@/components/router/protectedRoutes';
+import { UserProvider } from '@/context/UserContext';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/dashboard',
-        element: <DashboardPage />,
-        errorElement: <ErrorPage />
-      }
-    ]
+    errorElement: <ErrorPage />
   },
   {
     path: '/login',
@@ -26,6 +21,17 @@ export const router = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <ProtectedRoutes>
+        <UserProvider>
+          <DashboardPage />
+        </UserProvider>
+      </ProtectedRoutes>
+    ),
     errorElement: <ErrorPage />
   }
 ]);

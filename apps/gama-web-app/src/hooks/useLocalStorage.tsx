@@ -6,8 +6,25 @@ import { useState } from 'react';
  * @param initialValue
  */
 export const useLocalStorage = () => {
-  const setItem = () => {};
-  const getItem = () => {};
-  const removeItem = () => {};
-  return {};
+  const setItem = (key: string, value: string) => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const getItem = (key: string) => {
+    try {
+      const value = window.localStorage.getItem(key);
+      if (value) {
+        return JSON.parse(value);
+      } else return null;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const removeItem = () => {
+    return null;
+  };
+  return { setItem, getItem, removeItem };
 };

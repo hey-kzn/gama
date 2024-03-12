@@ -1,9 +1,10 @@
-import { useUser } from '@/context/UserContext.tsx';
+import { useUser } from '@/hooks/useUser.tsx';
 
 export const DashboardPage = () => {
+  const { user } = useUser();
   return (
     <>
-      <div>Dashboard (GG t'es co )</div>
+      <div>Dashboard (GG t'es co ) {user}</div>
     </>
   );
 };
