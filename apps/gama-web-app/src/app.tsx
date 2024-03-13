@@ -1,11 +1,11 @@
 import { RouterProvider } from 'react-router-dom';
 import { router } from '@/components/router/router';
-import { AuthProdiver } from '@/context/AuthContext';
+import { AuthProvider } from '@/context/AuthContext';
 
 export const App = () => {
   return (
-    <AuthProdiver>
+    <AuthProvider>
       <RouterProvider router={router}></RouterProvider>
-    </AuthProdiver>
+    </AuthProvider>
   );
 };

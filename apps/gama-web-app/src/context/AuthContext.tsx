@@ -1,10 +1,16 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { redirect } from 'react-router-dom';
-import * as DTO from '@/services/auth/auth';
-import { loginUser } from '@/services/auth/auth.service.ts';
-import { useLocalStorage } from '@/hooks/useLocalStorage.tsx';
+import { LoginDTO } from '@/services/auth/auth.dto';
+import { loginUser } from '@/services/auth/auth.service';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-export const AuthContext = createContext({});
+interface AuthContextType {
+  isAuth?: boolean;
+  login?: (dto: LoginDTO) => Promise<Response>;
+  logout?: () => void;
+  refreshRT?: () => void;
+}
+export const AuthContext = createContext<AuthContextType>({});
 
 /**
  *
@@ -12,26 +18,32 @@ export const AuthContext = createContext({});
  * @constructor
  * @description Permet de savoir si l'utilsateur est connecté ou non
  */
-export const AuthProdiver = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuth, setIsAuth] = useState(false);
   const { setItem } = useLocalStorage();
-  const login = async (dto: LoginDTO) => {
+  const login = async (dto: LoginDTO): Promise<Response> => {
     const data = await loginUser(dto);
-
-    console.log(data);
-    setItem('acess_token', data.access_token);
-    setItem('refresh_token', data.refresh_token);
-    // set un status de loading
-    // appelService
-    //  -> set le AT & RT du userContext
-    //  -> redirection vers le /dashboard
-    return redirect('/dashboard');
+    if (data) {
+      setItem('acess_token', data.access_token);
+      setItem('refresh_token', data.refresh_token);
+      setIsAuth(true);
+      return redirect('/dashboard');
+    }
   };
   const logout = () => {};
   const refreshRT = () => {};
+
   return (
-    <AuthContext.Provider value={{ login, logout, refreshRT }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ isAuth, login, logout, refreshRT }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
 // Custom hook for have access to the context
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) throw new Error('useAuth must be used within an AuthProvider');
+
+  return context;
+};

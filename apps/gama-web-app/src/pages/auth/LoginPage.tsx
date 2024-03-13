@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '@/hooks/useAuth.tsx';
+import { useAuth } from '@/context/AuthContext';
 
 export const LoginPage = () => {
   const { login } = useAuth();
