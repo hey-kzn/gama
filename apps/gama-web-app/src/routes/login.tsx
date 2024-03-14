@@ -1,4 +1,4 @@
-import { createFileRoute, createLazyFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useAuth } from '@/hooks/useAuth';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';

@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import { LoginDTO } from '@/services/auth/auth.dto';
 import { loginUser } from '@/services/auth/auth.service';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { Navigate, useNavigate } from '@tanstack/react-router';
 
 interface AuthContextType {
   isAuth?: boolean;
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       setItem('acess_token', data.access_token);
       setItem('refresh_token', data.refresh_token);
       setIsAuth(true);
-      return redirect('/');
+      return <Navigate to='/dashboard' />;
     }
   };
   const logout = () => {};
