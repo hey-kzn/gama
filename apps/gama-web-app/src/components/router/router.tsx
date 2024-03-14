@@ -1,14 +1,10 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { HomePage } from '../../pages/HomePage';
 import { ErrorPage } from '../../pages/ErrorPage';
 import { LoginPage } from '../../pages/auth/LoginPage';
 import { RegisterPage } from '../../pages/auth/RegisterPage';
 import { DashboardPage } from '@/pages/DashboardPage';
-
-const PrivateRoute = ({ children }) => {
-  const isAuth = useAuth();
-  return isAuth ? children : <Navigate to='/' />;
-};
+import { PrivateRoute } from '@/components/router/privateRoute';
 
 export const router = createBrowserRouter([
   {

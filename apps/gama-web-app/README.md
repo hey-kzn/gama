@@ -18,6 +18,7 @@ src/
 
 ### Stackdev
 - 
-- [shadcn-ui](https://ui.shadcn.com/): components
-- react-router-dom: routing de l'app
-- zod: validation des entrées utilisateur
+- Customisation des composants: [shadcn-ui](https://ui.shadcn.com/)
+- Contrôle des entrées utilisateur: [Zod](https://zod.dev/)
+- Routing: [TanStack Router](https://tanstack.com/router/latest)
+- Form: [React Hook Form](https://react-hook-form.com/)

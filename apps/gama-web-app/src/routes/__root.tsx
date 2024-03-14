@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { createRootRoute } from '@tanstack/react-router';
+import { Link } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const HomePage = () => {
@@ -7,10 +8,9 @@ export const HomePage = () => {
       <header className='flex justify-between items-center h-24 max-w-[1240px] mx-auto'>
         <h1 className='w-full text-3xl font-bold'>GAMA</h1>
         <div className='flex space-x-4'>
-          <Link to='/login'>
-            <Button>Login</Button>
-          </Link>
-          <Link to='/register'>
+          <Link to='/login'>Login</Link>
+
+          <Link to=''>
             <Button>Register</Button>
           </Link>
         </div>
@@ -23,3 +23,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export const Route = createRootRoute({ component: HomePage });

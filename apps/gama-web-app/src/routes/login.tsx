@@ -1,4 +1,8 @@
-import { Button } from '@/components/ui/button';
+import { createFileRoute, createLazyFileRoute } from '@tanstack/react-router';
+import { useAuth } from '@/hooks/useAuth';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -7,11 +11,8 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '@/context/AuthContext';
+import { Button } from '@/components/ui/button';
 
 export const LoginPage = () => {
   const { login } = useAuth();
@@ -83,3 +84,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export const Route = createFileRoute('/login')({ component: LoginPage });
