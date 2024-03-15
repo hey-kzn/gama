@@ -7,12 +7,12 @@
 ```
 src/
   assets/
-  components/           # Composants de l'application réutilisable
-  context/              # Store de l'application
+  components/           # Content des pages
   hooks/
   lib/
-  pages/                # Interface utilisateur
-  services/             # Appel des données
+  pages/                # Les différentes page
+  services/             # Couche API / logique
+  stores/               # Global context
   utils/
 ```
 
