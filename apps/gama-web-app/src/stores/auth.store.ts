@@ -5,6 +5,7 @@ type State = {
   isAuth: boolean;
 };
 
+// Toutes la logique qui permet d'update le state
 type Action = {
   updateIsAuth: (isAuth: State['isAuth']) => void;
   login: () => void;
@@ -14,8 +15,20 @@ type Action = {
   clearTokens: () => void;
 };
 
+type AuthStore = {
+  state: {
+    accessToken: string | undefined
+    refreshToken: string | undefined
+  },
+  action: {
+    loginUser: () => void;
+    logoutUser: () => void;
+  }
+}
+
 // C
 const useAuthStore = create<State & Action>((set) => ({
   isAuth: false,
-  updateIsAuth: () => void;
+  updateIsAuth: (newSate) => set(() => ({isAuth: newSate}));
+  login: () =>
 }));
