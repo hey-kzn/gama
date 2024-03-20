@@ -1,34 +1,33 @@
 import { create } from 'zustand';
+import { authService } from '@/services/auth/auth.service';
 
-type State = {
-  // l'utilisateur s'est connecté
+type Token = {
+  accessToken: string | undefined,
+  refreshToken: string | undefined,
+}
+
+type AuthState = {
   isAuth: boolean;
+  Token: Token | undefined
 };
 
-// Toutes la logique qui permet d'update le state
-type Action = {
-  updateIsAuth: (isAuth: State['isAuth']) => void;
-  login: () => void;
-  logout: () => void;
-  getAccessToken: () => void;
-  getRefreshToken: () => void;
+type AuthAction = {
+  updateIsAuth: () => void;
+  loginUser: () => void;
+  logoutUser: () => void;
+  getTokens: () => Token;
   clearTokens: () => void;
 };
 
-type AuthStore = {
-  state: {
-    accessToken: string | undefined
-    refreshToken: string | undefined
-  },
-  action: {
-    loginUser: () => void;
-    logoutUser: () => void;
-  }
-}
 
 // C
-const useAuthStore = create<State & Action>((set) => ({
+const AuthStore = create<AuthState & AuthAction>((set) => ({
   isAuth: false,
   updateIsAuth: (newSate) => set(() => ({isAuth: newSate}));
-  login: () =>
+  loginUser: () => set(() => (
+    const resp  = await authService.login()
+  )),
+  logoutUser: () => set(() => (
+
+  )),
 }));
