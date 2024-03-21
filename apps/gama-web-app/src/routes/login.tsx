@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useAuth } from '@/hooks/useAuth';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,7 +14,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 export const LoginPage = () => {
-  const { login } = useAuth();
   // Component
   function UserAuthForm() {
     const formSchema = z.object({
@@ -30,7 +28,6 @@ export const LoginPage = () => {
       }
     });
     async function handleLogin(values: z.infer<typeof formSchema>) {
-      await login(values);
       console.log(values);
     }
 

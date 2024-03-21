@@ -1,4 +1,3 @@
-import { AuthProvider } from '@/context/AuthContext';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -13,9 +12,5 @@ declare module '@tanstack/react-router' {
 }
 
 export const App = () => {
-  return (
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 };
