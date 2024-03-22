@@ -1,33 +1,30 @@
 import { create } from 'zustand';
-import { authService } from '@/services/auth/auth.service';
-import { LoginDTO } from '@/services/auth/auth.dto';
 
-type Token = {
+type AuthState = {
+  isAuth: boolean | undefined;
   accessToken: string | undefined;
   refreshToken: string | undefined;
 };
 
-type AuthState = {
-  isAuth: boolean | undefined;
-  tokens: Token | undefined;
-};
-
 type AuthAction = {
-  setAccessToken: (AT: Token['accessToken']) => void;
-  setRefreshToken: (RT: Token['refreshToken']) => void;
-  getTokens: () => Token;
-  updateIsAuth: () => void;
-  loginUser: (credentials: LoginDTO) => void;
-  logoutUser: () => void;
+  setAccessToken: (at: string) => void;
+  setRefreshToken: (rt: string) => void;
   clearTokens: () => void;
+  updateIsAuth: () => void;
 };
 
 // C
-const AuthStore = create<AuthState & AuthAction>((set) => ({
+export const useAuthStore = create<AuthState & AuthAction>((set) => ({
+  accessToken: undefined,
+  refreshToken: undefined,
   isAuth: undefined,
-  tokens: undefined,
-  setAccessToken: (AT) => {
-    set({ tokens[''] });
+  setAccessToken: (at: string | undefined) => set({ accessToken: at }),
+  setRefreshToken: (rt: string | undefined) => set({ refreshToken: rt }),
+  clearTokens: () => {
+    set({
+      accessToken: undefined,
+      refreshToken: undefined
+    });
   },
-  setRefreshToken: () => {}
+  updateIsAuth: () => {}
 }));
