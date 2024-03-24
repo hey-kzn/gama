@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -12,8 +11,15 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useAuthStore } from '@/stores/auth.store';
+import { useEffect, useState } from 'react';
+import { authService } from '@/services/auth/auth.service.ts';
 
 export const LoginPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { setRefreshToken, setAccessToken } = useAuthStore();
+
   // Component
   function UserAuthForm() {
     const formSchema = z.object({
@@ -27,13 +33,28 @@ export const LoginPage = () => {
         password: 'test1'
       }
     });
-    async function handleLogin(values: z.infer<typeof formSchema>) {
-      console.log(values);
-    }
+    const fetchLogin = async (values: z.infer<typeof formSchema>) => {
+      setLoading(true);
+      try {
+        const { data, error } = await authService.login(values);
+        if (error) setError(error);
+
+        setRefreshToken(data.refresh_token);
+        setAccessToken(data.access_token);
+      } catch (errorCatch) {
+        setError(errorCatch);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    useEffect(() => {
+      fetchLogin();
+    }, []);
 
     return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleLogin)} className='w-full'>
+        <form onSubmit={form.handleSubmit(fetchLogin)} className='w-full'>
           <div className='space-y-2.5'>
             <FormField
               control={form.control}
@@ -67,6 +88,10 @@ export const LoginPage = () => {
             Connexion
           </Button>
         </form>
+        <div>
+          <div>{loading && <div>Chargement en cours...</div>}</div>
+          <div>{error && <div>Erreur: {error}</div>}</div>
+        </div>
       </Form>
     );
   }

@@ -1,34 +1,26 @@
-import * as DTO from '@/services/auth/auth.dto';
-import { useAuthStore } from '@/stores/auth.store';
+import { LoginResponseDTO, LoginRequestDTO, RegisterRequestDTO } from '@/services/auth/auth.dto';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL_API;
 
-interface JWT {
-  accessToken: string;
-  refreshToken: string;
-}
-
-async function login(loginDTO: DTO.LoginDTO): Promise<void> {
-  const { setAccessToken, setRefreshToken } = useAuthStore.getState();
-
-  const response = await fetch(`${BASE_URL}/auth/local/login`, {
+/**
+ * @param loginDTO
+ * @description Appel API pour connecter l'utilisateur
+ * @return LoginResponseDTO
+ */
+async function login(loginDTO: LoginRequestDTO): Promise<LoginResponseDTO> {
+  return await fetch(`${BASE_URL}/auth/local/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify(loginDTO)
-  });
-
-  if (!response.ok) throw new Error('failed to login');
-
-  const result: JWT = await response.json();
-
-  setAccessToken(result.accessToken);
-  setRefreshToken(result.refreshToken);
+  })
+    .then((resp) => resp.json())
+    .catch((error) => error.message);
 }
 
-async function register(registerDTO: DTO.RegisterDTO) {
+async function register(registerDTO: RegisterRequestDTO) {
   return await fetch(`${BASE_URL}/auth/local/register`, {
     method: 'POST',
     headers: {
@@ -38,7 +30,7 @@ async function register(registerDTO: DTO.RegisterDTO) {
     body: JSON.stringify(registerDTO)
   })
     .then((response) => response.json())
-    .then((result) => result.data);
+    .catch((err) => err.message);
 }
 
 export const authService = {
