@@ -26,5 +26,6 @@ export const useAuthStore = create<AuthState & AuthAction>((set) => ({
       refreshToken: undefined
     });
   },
+  /// TODO
   updateIsAuth: () => {}
 }));

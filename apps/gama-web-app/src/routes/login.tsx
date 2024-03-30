@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import {
   Form,
   FormControl,
@@ -11,16 +12,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useAuthStore } from '@/stores/auth.store';
-import { useEffect, useState } from 'react';
-import { authService } from '@/services/auth/auth.service.ts';
+import { useEffect } from 'react';
 
 export const LoginPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { setRefreshToken, setAccessToken } = useAuthStore();
-
-  // Component
   function UserAuthForm() {
     const formSchema = z.object({
       email: z.string().min(2).max(50),
@@ -33,66 +27,47 @@ export const LoginPage = () => {
         password: 'test1'
       }
     });
-    const fetchLogin = async (values: z.infer<typeof formSchema>) => {
-      setLoading(true);
-      try {
-        const { data, error } = await authService.login(values);
-        if (error) setError(error);
-
-        setRefreshToken(data.refresh_token);
-        setAccessToken(data.access_token);
-      } catch (errorCatch) {
-        setError(errorCatch);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    useEffect(() => {
-      fetchLogin();
-    }, []);
+    useEffect(() => {});
 
     return (
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(fetchLogin)} className='w-full'>
-          <div className='space-y-2.5'>
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder='shadcn' {...field} type='email' />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder='shadcn' {...field} type='password' />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+      <>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(fetchLogin)} className='w-full'>
+            <div className='space-y-2.5'>
+              <FormField
+                control={form.control}
+                name='email'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder='shadcn' {...field} type='email' />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='email'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder='shadcn' {...field} type='password' />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-          <Button type='submit' className='w-full'>
-            Connexion
-          </Button>
-        </form>
-        <div>
-          <div>{loading && <div>Chargement en cours...</div>}</div>
-          <div>{error && <div>Erreur: {error}</div>}</div>
-        </div>
-      </Form>
+            <Button type='submit' className='w-full mt-8'>
+              Connexion
+            </Button>
+          </form>
+        </Form>
+      </>
     );
   }
 

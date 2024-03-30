@@ -8,18 +8,24 @@ const BASE_URL = import.meta.env.VITE_BASE_URL_API;
  * @return LoginResponseDTO
  */
 async function login(loginDTO: LoginRequestDTO): Promise<LoginResponseDTO> {
-  return await fetch(`${BASE_URL}/auth/local/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify(loginDTO)
-  })
-    .then((resp) => resp.json())
-    .catch((error) => error.message);
+  try {
+    const response = await fetch(`${BASE_URL}/auth/local/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify(loginDTO)
+    });
+    return await response.json();
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Une erreur inattendue s'est produite."
+    );
+  }
 }
 
+/// TODO: refacto
 async function register(registerDTO: RegisterRequestDTO) {
   return await fetch(`${BASE_URL}/auth/local/register`, {
     method: 'POST',
