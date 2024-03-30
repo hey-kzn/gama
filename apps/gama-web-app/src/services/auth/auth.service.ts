@@ -1,7 +1,8 @@
 import { LoginResponseDTO, LoginRequestDTO, RegisterRequestDTO } from '@/services/auth/auth.dto';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL_API;
-
+/// TODO: pourquoi BASE_URL ne s'instancie (null)
+// import.meta.env.VITE_BASE_URL_API;
+const BASE_URL = 'http://localhost:3001';
 /**
  * @param loginDTO
  * @description Appel API pour connecter l'utilisateur

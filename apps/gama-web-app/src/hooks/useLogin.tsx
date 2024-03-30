@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/auth.store';
 import { authService } from '@/services/auth/auth.service';
+import { useNavigate } from '@tanstack/react-router';
 
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -8,20 +9,26 @@ export const useLogin = () => {
 
   const { setRefreshToken, setAccessToken } = useAuthStore();
 
-  const login = async () => {
+  const navigate = useNavigate();
+
+  const login = async (credentials: { email: string; password: string }) => {
     try {
       setIsLoading(true);
-      const { data } = await authService.login(values);
-      if (error) setError(error);
+      console.log('je suis dans le hook useLogin');
+      const { data } = await authService.login(credentials);
 
-      setRefreshToken(data.refresh_token);
-      setAccessToken(data.access_token);
+      console.log(data);
 
-      // client nagivate => dashboard
-    } catch (errorCatch) {
-      setError(errorCatch);
+      if (data) {
+        setRefreshToken(data.refresh_token);
+        setAccessToken(data.access_token);
+
+        navigate({ to: '/dashboard' });
+      }
+    } catch (error) {
+      setError(error.message);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
   return { login, isLoading, error };
