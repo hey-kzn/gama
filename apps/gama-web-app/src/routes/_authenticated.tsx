@@ -7,7 +7,7 @@ export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async () => {
     if (!isAuth) {
       throw redirect({
-        to: '/login'
+        to: '/_public/login'
       });
     }
   }

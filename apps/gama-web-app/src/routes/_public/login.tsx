@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useLogin } from '@/hooks/useLogin';
-import { Button } from '@/components/ui/button';
+import { useLogin } from '@/hooks/useLogin.tsx';
+import { Button } from '@/components/ui/button.tsx';
 import { useState } from 'react';
 
 export const LoginPage = () => {
@@ -63,4 +63,4 @@ export const LoginPage = () => {
   );
 };
 
-export const Route = createFileRoute('/login')({ component: LoginPage });
+export const Route = createFileRoute('/_public/login')({ component: LoginPage });
