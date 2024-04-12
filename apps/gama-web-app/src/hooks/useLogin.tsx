@@ -14,10 +14,7 @@ export const useLogin = () => {
   const login = async (credentials: { email: string; password: string }) => {
     try {
       setIsLoading(true);
-      console.log('je suis dans le hook useLogin');
       const { data } = await authService.login(credentials);
-
-      console.log(data);
 
       if (data) {
         setRefreshToken(data.refresh_token);

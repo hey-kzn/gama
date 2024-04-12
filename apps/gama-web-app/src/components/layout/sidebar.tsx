@@ -1,4 +1,4 @@
-export const SideBar = () => {
+export const Sidebar = () => {
   return (
     <aside>
       <div>Profil financier</div>
