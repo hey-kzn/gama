@@ -7,7 +7,7 @@ export const HomePage = () => {
       <header className='flex justify-between items-center h-24 max-w-[1240px] mx-auto'>
         <h1 className='w-full text-3xl font-bold'>GAMA</h1>
         <div className='flex space-x-4'>
-          <Link to='/login'>
+          <Link to=''>
             <Button>Login</Button>
           </Link>
 

@@ -13,12 +13,8 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
-import { Route as PublicIndexImport } from './routes/_public/index'
-import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as PublicRegisterImport } from './routes/_public/register'
 import { Route as PublicLoginImport } from './routes/_public/login'
-import { Route as AppLayoutImport } from './routes/_app/_layout'
-import { Route as AppDashboardLayoutDashboardImport } from './routes/_app/dashboard/_layout.dashboard'
 
 // Create/Update Routes
 
@@ -28,16 +24,6 @@ const AuthenticatedRoute = AuthenticatedImport.update({
 } as any)
 
 const IndexRoute = IndexImport.update({
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PublicIndexRoute = PublicIndexImport.update({
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AppIndexRoute = AppIndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
@@ -52,17 +38,6 @@ const PublicLoginRoute = PublicLoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AppLayoutRoute = AppLayoutImport.update({
-  id: '/_app/_layout',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AppDashboardLayoutDashboardRoute =
-  AppDashboardLayoutDashboardImport.update({
-    path: '/dashboard/dashboard',
-    getParentRoute: () => rootRoute,
-  } as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -75,28 +50,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
-    '/_app/_layout': {
-      preLoaderRoute: typeof AppLayoutImport
-      parentRoute: typeof rootRoute
-    }
     '/_public/login': {
       preLoaderRoute: typeof PublicLoginImport
       parentRoute: typeof rootRoute
     }
     '/_public/register': {
       preLoaderRoute: typeof PublicRegisterImport
-      parentRoute: typeof rootRoute
-    }
-    '/_app/': {
-      preLoaderRoute: typeof AppIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_public/': {
-      preLoaderRoute: typeof PublicIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_app/dashboard/_layout/dashboard': {
-      preLoaderRoute: typeof AppDashboardLayoutDashboardImport
       parentRoute: typeof rootRoute
     }
   }
@@ -108,9 +67,6 @@ export const routeTree = rootRoute.addChildren([
   IndexRoute,
   PublicLoginRoute,
   PublicRegisterRoute,
-  AppIndexRoute,
-  PublicIndexRoute,
-  AppDashboardLayoutDashboardRoute,
 ])
 
 /* prettier-ignore-end */
