@@ -5,8 +5,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { OneToMany } from 'typeorm/browser';
-import { UserActivityProfil } from '../../profil-financier/activity/entity/user-activity-profil.entity';
 
 @Entity()
 export class User {

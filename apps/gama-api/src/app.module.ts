@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common/guards/at.guard';
-import { ProfilFinancierModule } from './profil-financier/profil-financier.module';
 
 @Module({
   imports: [
@@ -13,7 +12,6 @@ import { ProfilFinancierModule } from './profil-financier/profil-financier.modul
     AuthModule,
     DatabaseModule,
     UsersModule,
-    ProfilFinancierModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AtGuard }],
 })
