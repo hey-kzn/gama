@@ -4,10 +4,12 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Companies } from '../../activities/entity/companies.entity';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn('uuid', { primaryKeyConstraintName: 'PK_USER_ID' })
   id: string;
 
@@ -32,4 +34,7 @@ export class User {
 
   @Column({ type: 'varchar', nullable: true })
   hashed_rt?: string;
+
+  @OneToMany(() => Companies, (companies) => companies.user)
+  companies?: Companies[];
 }

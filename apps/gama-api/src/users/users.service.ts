@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entity/user.entity';
+import { Users } from './entity/users.entity';
 import { Repository } from 'typeorm';
 import { UpdateUserDTO } from './dto/update-user-dto';
 import { CreateUserDTO } from './dto/create-user.dto';
@@ -10,11 +10,11 @@ import { UserNotExistsException } from 'src/common/exceptions/user-not-exists.ex
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectRepository(Users)
+    private usersRepository: Repository<Users>,
   ) {}
 
-  async findOne(data): Promise<User> {
+  async findOne(data): Promise<Users> {
     try {
       // Essaye d'abord de trouver par ID
       const userById = await this.usersRepository.findOne({
@@ -41,7 +41,7 @@ export class UsersService {
     }
   }
 
-  async create(data: CreateUserDTO): Promise<User> {
+  async create(data: CreateUserDTO): Promise<Users> {
     let user = await this.findOne(data.email);
     if (user) throw new UserAlreadyExistsException();
 

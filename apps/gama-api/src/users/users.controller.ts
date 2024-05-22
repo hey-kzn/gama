@@ -12,6 +12,12 @@ export class UsersController {
     return await this.usersService.findOne(id);
   }
 
+  // Activité de l'utilisateur
+  @Get(':id/activities')
+  getUsersActivities() {
+    return 'todo';
+  }
+
   @Patch(':id')
   async update(@Param() id: string, @Body() dto: UpdateUserDTO) {
     return await this.usersService.update(id, dto);

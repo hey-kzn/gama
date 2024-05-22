@@ -6,7 +6,7 @@ import { RtStrategy } from './strategies/rt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/users/entity/user.entity';
+import { Users } from 'src/users/entity/users.entity';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { User } from 'src/users/entity/user.entity';
       secret: process.env.JWT_ACCESS_CONST,
     }),
     PassportModule,
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Users]),
   ],
   controllers: [AuthController],
   providers: [AuthService, AtStrategy, RtStrategy],
