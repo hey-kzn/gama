@@ -21,10 +21,10 @@ export class Companies {
   job: string;
   @Column()
   annual_salary_brut: string;
-  @Column()
-  started_at: string;
-  @Column()
-  end_at: string;
+  @Column({ type: 'date' })
+  started_at: Date;
+  @Column({ type: 'date' })
+  end_at: Date;
   @CreateDateColumn()
   created_at: string;
   @UpdateDateColumn()
